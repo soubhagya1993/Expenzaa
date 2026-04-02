@@ -25,7 +25,15 @@ export const HomeScreen: React.FC = () => {
   const expenses = useExpenseStore((s) => s.expenses);
   const getRecentExpenses = useExpenseStore((s) => s.getRecentExpenses);
   const deleteExpense = useExpenseStore((s) => s.deleteExpense);
+  const getMonthlyTotal = useExpenseStore((s) => s.getMonthlyTotal);
   const { total, categoryTotals } = useMonthlyStats();
+
+  const now = new Date();
+  const prevMonth = now.getMonth() === 0 ? 11 : now.getMonth() - 1;
+  const prevYear = now.getMonth() === 0 ? now.getFullYear() - 1 : now.getFullYear();
+  const prevTotal = getMonthlyTotal(prevMonth, prevYear);
+  const trendPercent = prevTotal > 0 ? ((total - prevTotal) / prevTotal) * 100 : null;
+  const trendUp = trendPercent !== null && trendPercent >= 0;
 
   const recentExpenses = getRecentExpenses(5);
   const maxCategoryAmount = categoryTotals.length > 0
@@ -44,17 +52,22 @@ export const HomeScreen: React.FC = () => {
         style={[styles.headerGradient, { paddingTop: insets.top + SPACING.lg }]}
       >
         <Text style={styles.greeting}>{getGreeting()}</Text>
-        <Text style={styles.userName}>Emma</Text>
       </LinearGradient>
 
       {/* Total Spent Card */}
       <View style={styles.totalCard}>
         <Text style={styles.totalLabel}>Total spent this month</Text>
         <Text style={styles.totalAmount}>{formatCurrency(total)}</Text>
-        {total > 0 && (
+        {total > 0 && trendPercent !== null && (
           <View style={styles.trendRow}>
-            <Ionicons name="trending-up" size={14} color={COLORS.primary} />
-            <Text style={styles.trendText}> 12% vs last month</Text>
+            <Ionicons
+              name={trendUp ? 'trending-up' : 'trending-down'}
+              size={14}
+              color={trendUp ? COLORS.primary : COLORS.error}
+            />
+            <Text style={[styles.trendText, !trendUp && { color: COLORS.error }]}>
+              {' '}{Math.abs(Math.round(trendPercent))}% vs last month
+            </Text>
           </View>
         )}
       </View>
@@ -157,12 +170,6 @@ const styles = StyleSheet.create({
     fontSize: FONT_SIZES.md,
     color: COLORS.textSecondary,
     fontWeight: '400',
-  },
-  userName: {
-    fontSize: FONT_SIZES['2xl'],
-    fontWeight: '800',
-    color: COLORS.textPrimary,
-    marginTop: 2,
   },
   // Total Card
   totalCard: {

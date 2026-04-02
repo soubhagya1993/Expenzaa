@@ -70,8 +70,8 @@ export const SettingsScreen: React.FC = () => {
         <View style={styles.avatarCircle}>
           <Ionicons name="person-outline" size={32} color={COLORS.textWhite} />
         </View>
-        <Text style={styles.profileName}>Emma Johnson</Text>
-        <Text style={styles.profileEmail}>emma@example.com</Text>
+        <Text style={styles.profileName}>My Account</Text>
+        <Text style={styles.profileEmail}>Personal Expenses</Text>
       </View>
 
       {/* Menu Items */}
