@@ -7,6 +7,7 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
+      "image": "./assets/splash.png",
       "backgroundColor": "#F4F5FA",
       "resizeMode": "contain"
     },
@@ -15,17 +16,27 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.soubhagya.expenzaa"
+      "bundleIdentifier": "com.soubhagya.expenzaa",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#F4F5FA"
       },
-      "package": "com.expense.tracker"
+      "package": "com.soubhagya.expenzaa"
     },
+    "privacyPolicyUrl": "https://soubhagya1993.github.io/Expenzaa/privacy-policy",
     "plugins": [
       "expo-font",
       "expo-asset"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "796e0f1d-7b7f-47ba-844f-d8ba8d0539b5"
+      }
+    }
   }
 }
