@@ -62,6 +62,9 @@ export const StatsScreen: React.FC = () => {
     setSelectedYear(newYear);
   };
 
+  const isCurrentMonth =
+    selectedMonth === now.getMonth() && selectedYear === now.getFullYear();
+
   const hasData = categoryTotals.length > 0;
 
   return (
@@ -90,8 +93,15 @@ export const StatsScreen: React.FC = () => {
         <TouchableOpacity
           onPress={() => navigateMonth(1)}
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          disabled={isCurrentMonth}
+          accessibilityLabel="Next month"
+          accessibilityState={{ disabled: isCurrentMonth }}
         >
-          <Ionicons name="chevron-forward" size={20} color={COLORS.textSecondary} />
+          <Ionicons
+            name="chevron-forward"
+            size={20}
+            color={isCurrentMonth ? COLORS.border : COLORS.textSecondary}
+          />
         </TouchableOpacity>
       </View>
 

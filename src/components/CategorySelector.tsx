@@ -25,6 +25,9 @@ export const CategorySelector: React.FC<Props> = ({ selectedId, onSelect, error 
               ]}
               onPress={() => onSelect(cat.id)}
               activeOpacity={0.7}
+              accessibilityRole="radio"
+              accessibilityLabel={cat.name}
+              accessibilityState={{ checked: isSelected }}
             >
               <View
                 style={[

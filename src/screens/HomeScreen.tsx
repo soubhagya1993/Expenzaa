@@ -12,8 +12,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { useExpenseStore } from '../store';
-import { useMonthlyStats, useCategoryLookup } from '../hooks';
-import { getCategoryById, COLORS, SPACING, RADIUS, SHADOWS, FONT_SIZES, CATEGORIES } from '../constants';
+import { useMonthlyStats } from '../hooks';
+import { getCategoryById, COLORS, SPACING, RADIUS, SHADOWS, FONT_SIZES } from '../constants';
 import { formatCurrency, getGreeting } from '../utils';
 import { ExpenseCard, CategoryRow, EmptyState } from '../components';
 import { Expense } from '../types';
@@ -93,14 +93,7 @@ export const HomeScreen: React.FC = () => {
 
       {/* Recent Transactions Header */}
       <View style={styles.section}>
-        <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>Recent Transactions</Text>
-          {recentExpenses.length > 0 && (
-            <TouchableOpacity>
-              <Text style={styles.viewAll}>View All</Text>
-            </TouchableOpacity>
-          )}
-        </View>
+        <Text style={styles.sectionTitle}>Recent Transactions</Text>
       </View>
     </View>
   );
@@ -209,21 +202,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: SPACING.xl,
     marginBottom: SPACING.sm,
   },
-  sectionHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
   sectionTitle: {
     fontSize: FONT_SIZES.lg,
     fontWeight: '700',
     color: COLORS.textPrimary,
-    marginBottom: SPACING.lg,
-  },
-  viewAll: {
-    fontSize: FONT_SIZES.sm,
-    color: COLORS.primary,
-    fontWeight: '600',
     marginBottom: SPACING.lg,
   },
   // FAB

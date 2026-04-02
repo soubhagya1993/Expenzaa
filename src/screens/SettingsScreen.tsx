@@ -82,16 +82,6 @@ export const SettingsScreen: React.FC = () => {
         <MenuItem icon="help-circle-outline" label="Help & Support" onPress={handleComingSoon} />
       </View>
 
-      {/* Logout */}
-      <View style={styles.menuGroup}>
-        <MenuItem
-          icon="log-out-outline"
-          label="Logout"
-          isDestructive
-          onPress={handleComingSoon}
-        />
-      </View>
-
       <View style={{ height: 100 }} />
     </ScrollView>
   );

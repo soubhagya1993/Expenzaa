@@ -78,7 +78,7 @@ export const AppNavigator: React.FC = () => {
   const isHydrated = useExpenseStore((s) => s.isHydrated);
 
   if (!isHydrated) {
-    return null; // Or a splash screen
+    return <View style={{ flex: 1, backgroundColor: COLORS.background }} />;
   }
 
   return (
